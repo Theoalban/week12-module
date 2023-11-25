@@ -1,0 +1,4 @@
+output "public-public_ip" {
+  value = aws_instance.name.public_dns
+
+}
