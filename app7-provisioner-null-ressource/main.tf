@@ -8,7 +8,7 @@ resource "aws_instance" "name" {
   instance_type = "t2.micro"
   key_name      = aws_key_pair.ec2_key.key_name
 
-  depends_on = [aws_key_pair.ec2_key, aws_iam_group.group1]
+  depends_on = [aws_key_pair.ec2_key, aws_iam_group.group1, local_file.ssh_key]
 
   connection {
     type        = "ssh"
@@ -17,11 +17,11 @@ resource "aws_instance" "name" {
     host        = self.public_ip
   }
   provisioner "local-exec" {
-    when    = destroy
+    when    = destroy.........................../apply
     command = "echo hello"
   }
   provisioner "remote-exec" {
-    when = destroy
+    when = destroy............................/apply
     inline = [
       "sudo yum update -y",
       "mkdir theo",
